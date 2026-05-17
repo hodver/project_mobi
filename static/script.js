@@ -85,8 +85,6 @@ async function loadRainMap() {
 
 
 
-//buttons
-
 
 
 //functions
