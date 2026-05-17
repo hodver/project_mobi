@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
     <header>
@@ -81,7 +83,7 @@
                 <span>🎯</span>
                 <span id="score-banner-text">Showing parks ranked by your selected conditions</span>
             </div>
-            
+            <div id="map"></div>
             <div class="parks-grid" id="parks-grid"></div>
             <div class="empty-state" id="empty-state">
                 <div class="es-icon">🌿</div>
