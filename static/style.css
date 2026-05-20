@@ -538,3 +538,103 @@ header {
     overflow: hidden;
     margin-bottom: 20px;
 }
+
+/* Map */
+#map {
+    width: 100%;
+    height: 420px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    border: 1.5px solid var(--sand);
+    z-index: 0;
+}
+
+.park-tooltip{
+    font-size: 0.82rem;
+    font-family: 'DM Sans', sans-serif;
+    border-radius: 6px;
+    padding: 6px 10px;
+    border: 1px solid var(--sand);
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Card compare toggle*/
+.card-compare-check{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 1.5px solid var(--sand);
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    transition: all 0.15s;
+    z-index: 5;
+}
+
+.card-compare-check:hover{
+    border-color: var(--sky);
+}
+
+.card-compare-check.checked{
+    background: var(--sky);
+    border-color: var(--sky);
+    color: var(--white);
+}
+
+/* Compare count badge */
+.compare-count-badge{
+    background: var(--sky);
+    color: var(--white);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-left: 6px;
+}
+
+/* Radar canvas wrapper */
+.radar-wrap{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0.5rem;
+}
+
+/* Compare stat row */
+.compare-stat-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--sand);
+    font-size: 0.85rem;
+}
+
+.compare-stat-label{
+    color: var(--text-muted);
+}
+
+.compare-stat-bar-wrap{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.compare-stat-bar-bg{
+    width: 80px;
+    height: 6px;
+    background: var(--cream);
+    border-radius: 3px;
+    overflow: hidden;
+}
