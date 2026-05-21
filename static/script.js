@@ -170,6 +170,30 @@ function setActiveMarker(id) {
     Object.entries(parkMarkers).forEach(([pid, m]) => m.setIcon(makeParkIcon(pid === id)));
 }
 
+/* live weather banner - open-meteo */
+async function loadWeather() {
+    const url = 'https://api.open-meteo.com/v1/forecast?latitude=49.89&longitude=10.89&current_weather=true';
+    try {
+        const data = await (await fetch(url)).json();
+        const { temperature: temp, weathercode: code } = data.current_weather;
+        document.getElementById('score-banner-text').innerText = `Bamberg right now: ${temp}°C - ${wmoLabel(code)}`;
+        document.getElementById('score-banner').classList.add('visible');
+    } catch (e) {
+        console.error('Weather error:', e);
+    }
+}
+
+function wmoLabel(code) {
+    if (code === 0) return 'Clear sky ☀️';
+    if (code <= 3) return 'Partly cloudy ⛅';
+    if (code <= 49) return 'Foggy 🌫️';
+    if (code <= 67) return 'Rainy 🌧️';
+    if (code <= 77) return 'Snowy ❄️';
+    if (code <= 82) return 'Showers 🌦️';
+    if (code <= 99) return 'Thunderstorm ⛈️';
+    return 'Variable 🌤️';
+}
+
 //api
 //This function fetches the current temperature for Bamberg (center) and displays it in the banner on the page.
 async function loadWeather() {
