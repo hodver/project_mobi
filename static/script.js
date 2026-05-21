@@ -118,6 +118,58 @@ const PARKS = [
     }
 ];
 
+/* STATE */
+let activeWeather = new Set();
+let activePoi = new Set(['transit', 'food', 'shopping', 'sightseeing', 'playground']);
+let compareSet = new Set();
+let openDetailId = null;
+let parkMarkers = {};
+
+/* MAP SETUP */
+const map = L.map('map').setView([49.8988, 10.8956], 14);
+
+L.titleLayer('https://title.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="hhtps://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+function makeParkIcon(active = false) {
+    const bg = active ? '#2d4a1e' : '#4a7c2f';
+    return L.divIcon({
+        className: '',
+        html: `<div style="
+            width:34px;height:34px;
+            background:${bg};
+            border:3px solid white;
+            border-radius:50% 50% 50% 0;
+            transform:rotate(-45deg);
+            box-shadow:0 2px 8px rgba(0,0,0,0.3);
+        "></div>`,
+        iconSize: [34, 34],
+        iconAnchor: [17, 34],
+        popupAnchor: [0, -36]
+    });
+}
+
+function initParkMarkers() {
+    PARKS.forEach(park => {
+        const marker = L.marker([park.lat, park.lon], {icon: makeParkIcon(false)})
+            .addTo(map)
+            .bindTooltip(`<b>${park.name}</b><br><span style="font-size:0.8em;color#666">${park.district}</span>`, {
+                direction: 'top', offset: [0, -36], className: 'park-tooltip'
+            });
+        marker.on('click', () => {
+            openDetail(park.id);
+            map.flyTo([park.lat, park.lon], 16, {duration: 0.8});
+        });
+        parkMarkers[park.id] = marker;
+    });
+}
+
+function setActiveMarker(id) {
+    Object.entries(parkMarkers).forEach(([pid, m]) => m.setIcon(makeParkIcon(pid === id)));
+}
+
 //api
 //This function fetches the current temperature for Bamberg (center) and displays it in the banner on the page.
 async function loadWeather() {
